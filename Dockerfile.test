@@ -1,0 +1,8 @@
+FROM timbru31/node-chrome:fermium-alpine
+WORKDIR /app
+COPY ["package.json", "yarn.lock", "./"]
+RUN yarn
+COPY ./ ./
+ENV CHROME_BIN=/usr/bin/chromium-browser
+ENV LIGHTHOUSE_CHROMIUM_PATH=/usr/bin/chromium-browser
+ENTRYPOINT yarn test:ci
